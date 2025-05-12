@@ -1,46 +1,94 @@
-# Getting Started with Create React App
+# Onboarding Flow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, animated onboarding experience built with React and TypeScript. This project provides a sophisticated user interface for collecting company information during the onboarding process.
 
-## Available Scripts
+![Onboarding Flow Demo](demo.gif)
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- 🎨 Beautiful, modern UI with smooth animations
+- 📱 Responsive design that works on all devices
+- ⚡ Real-time form validation
+- 🎭 Smooth transitions using Framer Motion
+- 🎯 Type-safe development with TypeScript
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (v14 or higher)
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/yourusername/onboarding-flow.git
+cd onboarding-flow
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+# or
+yarn install
+```
 
-### `npm run eject`
+3. Start the development server:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm start
+# or
+yarn start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will be available at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🛠️ Built With
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [React](https://reactjs.org/) - Frontend framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
 
-## Learn More
+## 📁 Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+├── components/     # React components
+├── assets/        # Static assets
+├── Models/        # TypeScript interfaces and types
+└── App.tsx        # Main application component
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🎨 Component Features
+
+### HeaderContent
+
+- Dynamic company logo generation
+- Animated transitions for website URL display
+- Responsive layout adjustments
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors
+
+- Your Name - Initial work
+
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped shape this project
+- Inspired by modern onboarding experiences
