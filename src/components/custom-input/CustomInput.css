@@ -1,0 +1,69 @@
+.input-container {
+  position: relative;
+  display: inline-block;
+  font-size: clamp(2rem, 2.5vw, 5rem);
+  font-family: 'Satoshi', sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  margin-bottom: 25px;
+}
+
+.input-container input {
+  padding: 12px 0;
+  border: none;
+  outline: none;
+  background: none;
+  color: transparent;
+  caret-color: transparent;
+  font: inherit;
+  width: auto;
+}
+
+.input-container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px 0;
+  pointer-events: none;
+  white-space: pre;
+  font: inherit;
+  color: var(--dark-grey);
+  font-weight: 600;
+}
+
+.input-container .overlay span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(5px);
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.input-container .overlay span.typed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.input-container .cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 80%;
+  background-color: var(--cursor-color);
+  animation: blink 1s step-start infinite;
+  z-index: 2;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.placeholder {
+  color: #94a3b8;
+  opacity: 1 !important;
+  transform: none !important;
+  font-weight: 400;
+}

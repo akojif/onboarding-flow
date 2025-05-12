@@ -1,0 +1,235 @@
+.onboading {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px 30px;
+}
+
+.onboading-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.onboading-nav .logo-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.onboarding-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.onboading input::placeholder {
+  color: #ccc;
+}
+
+.onboading-title {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--dark-grey-1);
+  white-space: nowrap;
+}
+
+.centered-custom-input {
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+/* get started step */
+
+.get-started-step {
+  background-color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  .agreement-text {
+    font-size: 12px;
+    color: var(--light-grey-6);
+    margin-top: 20px;
+    max-width: 410px;
+    width: 100%;
+  }
+}
+
+/* platform step */
+.platform-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.platform-step svg {
+  width: 400px;
+}
+
+.platform-step .radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.platform-step .radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.onboarding-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  font-size: 13px;
+}
+
+.onboarding-footer span {
+  color: var(--light-grey-6);
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--light-grey-6);
+}
+.footer-links a:first-of-type {
+  margin-right: 10px;
+}
+
+.website-name-step .overlay::before {
+  content: 'https://';
+  color: #ccc;
+  width: max-content;
+}
+
+.website-name-step .input-container .placeholder {
+  display: none;
+}
+
+.product-preference {
+  .product-group {
+    list-style: none;
+    display: flex;
+    max-width: 1000px;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+
+    .product {
+      border: 2px solid var(--light-grey-2);
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      white-space: nowrap;
+      font-size: clamp(15px, 1vw, 18px);
+      padding: 10px 20px;
+      color: var(--dark-grey-6);
+      font-weight: 500;
+      border-radius: 25px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.1s ease-in, transform 0.1s ease-in;
+
+      &.selected {
+        background: var(--light-blue-2);
+        border: 2px solid var(--light-blue-1);
+        color: var(--light-blue-1);
+      }
+
+      &:hover {
+        border-color: var(--light-grey-6);
+        color: var(--dark-grey-2);
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+
+      .selected {
+        background: #f9fbff;
+        border: 2px solid var(--secondary-color);
+        color: var(--cursor-color);
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.onboarding-content:has(.completed) {
+  justify-content: center;
+  align-items: center;
+}
+
+.completed {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-title-color);
+    margin-bottom: 10px;
+  }
+
+  .page-content {
+    max-width: 400px;
+    font-size: 14px;
+    text-align: center;
+    color: var(--light-grey-6);
+    margin-bottom: 20px;
+  }
+  button {
+    margin: 0 auto;
+  }
+}
+
+@keyframes typing-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-4px);
+  }
+  30% {
+    transform: translateY(0px);
+  }
+  40% {
+    transform: translateY(-1px);
+  }
+  50%,
+  60%,
+  100% {
+    transform: translateY(0); /* Pause here */
+  }
+}
+
+@media (max-width: 600px) {
+  .onboarding-content:has(.business-card) {
+    flex-direction: column-reverse;
+    gap: 40px;
+  }
+}
