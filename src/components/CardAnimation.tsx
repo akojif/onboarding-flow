@@ -1,7 +1,13 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-function CardAnimation({ currentStep, children }: { currentStep: number; children: React.ReactNode }) {
+function CardAnimation({
+  currentStep,
+  children,
+}: {
+  currentStep: number;
+  children: React.ReactNode;
+}) {
   const prevStepRef = useRef(currentStep); // used to remember prevStep
   const prevStep = prevStepRef.current;
 
@@ -24,7 +30,7 @@ function CardAnimation({ currentStep, children }: { currentStep: number; childre
       scale: 1,
       x: 0,
       y: 0,
-      transition: { delay: 0.5, type: 'spring', stiffness: 100, damping: 12 },
+      transition: { delay: 0.5, type: "spring", stiffness: 100, damping: 12 },
     },
   };
 
@@ -32,10 +38,10 @@ function CardAnimation({ currentStep, children }: { currentStep: number; childre
     <AnimatePresence>
       {showCard && (
         <motion.div
-          className="card-wrapper"
+          className='card-wrapper'
           variants={cardVariants}
-          initial={shouldAnimateIn ? 'initial' : false}
-          animate="visible"
+          initial={shouldAnimateIn ? "initial" : false}
+          animate='visible'
           exit={shouldAnimateOut ? { opacity: 0, y: -40 } : undefined}
           transition={{ duration: 0.4 }}
         >
@@ -48,7 +54,7 @@ function CardAnimation({ currentStep, children }: { currentStep: number; childre
 
 export default CardAnimation;
 
-// On initial page render useRef(currentStep) creates an object { current: 1 }, and React paints “Step 1.” to the DOM. useEffect runs and callback fires, setting prevStepRef.current = currentStep(1) (no change).
+// On initial page render useRef(currentStep) creates an object { current: 0 }, and React paints “Step 0.” to the DOM. useEffect runs and callback fires, setting prevStepRef.current = currentStep(1) (no change).
 
 // State/prop changes → re‑render → function body runs again with currentStep = 2. useRef does not recreate the ref; it returns the same object whose .current is still 1.
 

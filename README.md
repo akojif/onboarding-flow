@@ -8,7 +8,6 @@ A modern, animated onboarding experience built with React and TypeScript. This p
 
 - 🎨 Beautiful, modern UI with smooth animations
 - 📱 Responsive design that works on all devices
-- ⚡ Real-time form validation
 - 🎭 Smooth transitions using Framer Motion
 - 🎯 Type-safe development with TypeScript
 
@@ -83,12 +82,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Authors
-
-- Your Name - Initial work
-
-## 🙏 Acknowledgments
-
-- Thanks to all contributors who have helped shape this project
-- Inspired by modern onboarding experiences

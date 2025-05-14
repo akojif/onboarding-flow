@@ -14,7 +14,11 @@
 }
 
 .btn.gradient-bg {
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
   color: white;
   position: relative;
   padding: 14px 35px;
@@ -51,14 +55,15 @@
   border: 2px solid transparent;
   /* Gradient border setup */
   background: linear-gradient(white, white) padding-box,
-    linear-gradient(to right, var(--primary-color), var(--secondary-color)) border-box;
-  background-clip: padding-box, border-box;
+    linear-gradient(to right, var(--primary-color), var(--secondary-color))
+      border-box;
+  /* background-clip: padding-box, border-box; */
 
-  /* clips 1st linear gradient background origin to border-box and 2nd linear gradient background origin to padding-box i.e, context + padding area (order of placement is important) 
+  /* clips 1st linear gradient background origin to border-box and 2nd linear gradient background origin to padding-box i.e, conten t + padding area (order of placement is important) 
       */
 
-  background-size: 300% 100%;
-  animation: shimmer 2s linear infinite;
+  background-size: 400% 100%;
+  animation: colorCycle 5s linear infinite;
 }
 
 @keyframes borderFlow {
@@ -79,8 +84,6 @@
   }
 }
 
-/* background-size: 400% 100%;
-animation: colorCycle 5s linear infinite;
 @keyframes colorCycle {
   0% {
     background-position: 0% 50%;
@@ -88,4 +91,4 @@ animation: colorCycle 5s linear infinite;
   100% {
     background-position: 100% 50%;
   }
-} */
+}
