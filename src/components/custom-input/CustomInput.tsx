@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import "./CustomInput.css";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +21,7 @@ function CustomInput({
   const cursorRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const updateCursor = () => {
+  const updateCursor = useCallback(() => {
     if (!inputRef.current || !overlayRef.current || !cursorRef.current) return;
 
     if (value.length === 0) {
@@ -40,11 +40,11 @@ function CustomInput({
       // Auto-scroll to the end
       container.scrollLeft = container.scrollWidth;
     }
-  };
+  }, [value]);
 
   useEffect(() => {
     updateCursor();
-  }, [value]);
+  }, [updateCursor]);
 
   useEffect(() => {
     window.addEventListener("resize", updateCursor);
@@ -56,7 +56,7 @@ function CustomInput({
       }
     }
     return () => window.removeEventListener("resize", updateCursor);
-  }, []);
+  }, [updateCursor]);
 
   useEffect(() => {
     if (websiteVarient && cursorRef.current) {
@@ -72,7 +72,7 @@ function CustomInput({
   };
 
   return (
-    <div className="input-container">
+    <div className='input-container'>
       <input
         ref={inputRef}
         type={type}
@@ -85,19 +85,19 @@ function CustomInput({
         {...props}
       />
 
-      <div ref={overlayRef} className="overlay" style={{ paddingLeft: "8px" }}>
+      <div ref={overlayRef} className='overlay' style={{ paddingLeft: "8px" }}>
         {value.length === 0 ? (
-          <span className="placeholder">{placeholder}</span>
+          <span className='placeholder'>{placeholder}</span>
         ) : (
           Array.from(value).map((char, i) => (
-            <span key={i} className="typed">
+            <span key={i} className='typed'>
               {char}
             </span>
           ))
         )}
       </div>
 
-      <div ref={cursorRef} className="cursor" />
+      <div ref={cursorRef} className='cursor' />
     </div>
   );
 }

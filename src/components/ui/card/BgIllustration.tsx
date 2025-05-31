@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion';
-import LogoIcon from '../../icons/LogoIcon';
-import './CardIllustrations.css';
+import { motion } from "framer-motion";
+import LogoIcon from "../../icons/LogoIcon";
+import "./CardIllustrations.css";
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.3, y: -100 + '%' },
+  hidden: { opacity: 0, scale: 0.3, y: -100 + "%" },
   visible: {
     opacity: 1,
     scale: 1,
     y: -250,
-    type: 'spring',
+    type: "spring",
     stiffness: 100,
     damping: 10,
     transition: { delay: 0.3, duration: 0.5 },
@@ -17,11 +17,15 @@ const cardVariants = {
 
 export default function BgIllustration() {
   return (
-    <motion.div className="bg-illustration">
+    <motion.div className='bg-illustration'>
       <CardSkeleton />
       <EmojiIcons />
-      <MessageText logo={<LogoIcon />} text="Hi 👋 How can i help you?" animationEntry={100} />
-      <MessageText logo="M" text="I'm looking for  🚗" animationEntry={-100} />
+      <MessageText
+        logo={<LogoIcon />}
+        text='Hi 👋 How can i help you?'
+        animationEntry={100}
+      />
+      <MessageText logo='M' text="I'm looking for  🚗" animationEntry={-100} />
     </motion.div>
   );
 }
@@ -29,15 +33,15 @@ export default function BgIllustration() {
 const CardSkeleton = () => {
   return (
     <motion.div
-      className="card-skeleton"
+      className='card-skeleton'
       variants={cardVariants}
-      initial="hidden"
-      animate="visible"
+      initial='hidden'
+      animate='visible'
     >
-      <div className="card-content">
+      <div className='card-content'>
         <MessageText empty logo={<LogoIcon />} />
         <MessageText empty />
-        <div className="message-typing">
+        <div className='message-typing'>
           <span></span>
           <span></span>
           <span></span>
@@ -54,22 +58,27 @@ interface MessageTextProps {
   animationEntry?: number;
 }
 
-const MessageText = ({ logo, text, empty, animationEntry }: MessageTextProps) => {
+const MessageText = ({
+  logo,
+  text,
+  empty,
+  animationEntry,
+}: MessageTextProps) => {
   return (
     <motion.p
-      className={`text-message ${empty ? 'empty' : ''}`}
+      className={`text-message ${empty ? "empty" : ""}`}
       initial={{ opacity: 0, x: animationEntry }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.3, duration: 0.5 }}
     >
-      <span className="logo"> {logo} </span>
-      <span className="text">{text}</span>
+      <span className='logo'> {logo} </span>
+      <span className='text'>{text}</span>
     </motion.p>
   );
 };
 
 // emojis
-const emojis = ['💃', '👋', '💎', '🎮'];
+const emojis = ["💃", "👋", "💎", "🎮"];
 
 const initialPositions = [
   { scale: 0, x: 100, y: 100 },
@@ -87,13 +96,14 @@ const emojiTransition = {
 
 const EmojiIcons = () => {
   return (
-    <div className="emoji-icons">
+    <div className='emoji-icons'>
       {emojis.map((emoji, index) => (
         <motion.span
-          className="icon"
+          className='icon'
           initial={initialPositions[index]}
           animate={finalPositions}
           transition={emojiTransition}
+          key={emoji}
         >
           {emoji}
         </motion.span>
