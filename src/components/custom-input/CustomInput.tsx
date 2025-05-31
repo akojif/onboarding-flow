@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import "./CustomInput.css";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +21,8 @@ function CustomInput({
   const cursorRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const updateCursor = () => {
+  // updateCursor uses value and refs, so we memoize it based on value
+  const updateCursor = useCallback(() => {
     if (!inputRef.current || !overlayRef.current || !cursorRef.current) return;
 
     if (value.length === 0) {
@@ -32,20 +33,23 @@ function CustomInput({
     const overlayWidth = overlayRef.current.scrollWidth;
     const maxWidth = overlayRef.current.offsetWidth;
     const clampedWidth = Math.min(overlayWidth, maxWidth);
-    inputRef.current.style.width = "100%"; // Fixed width
+    inputRef.current.style.width = "100%";
     cursorRef.current.style.left = `${clampedWidth}px`;
 
     const container = overlayRef.current.parentElement;
     if (container) {
-      // Auto-scroll to the end
       container.scrollLeft = container.scrollWidth;
     }
-  };
-
-  useEffect(() => {
-    updateCursor();
   }, [value]);
 
+  // Update cursor on every value change
+  useEffect(() => {
+    updateCursor();
+  }, [updateCursor]);
+
+  // Add resize listener once (on mount)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     window.addEventListener("resize", updateCursor);
 
@@ -55,9 +59,11 @@ function CustomInput({
         cursorRef.current.style.left = "0px";
       }
     }
+
     return () => window.removeEventListener("resize", updateCursor);
   }, []);
 
+  // Website variant cursor adjustment
   useEffect(() => {
     if (websiteVarient && cursorRef.current) {
       cursorRef.current.style.left = "10ch";
