@@ -1,6 +1,7 @@
-import CustomInput from '../custom-input/CustomInput';
-import Button from '../ui/Button';
-import BgIllustration from '../ui/card/BgIllustration';
+import CustomInput from "../custom-input/CustomInput";
+import Button from "../ui/Button";
+import BgIllustration from "../ui/card/BgIllustration";
+
 function EmailStep({
   formData,
   onChange,
@@ -11,24 +12,24 @@ function EmailStep({
   nextStep: () => void;
 }) {
   return (
-    <div className="get-started-step">
+    <div className='get-started-step'>
       <BgIllustration />
-      <h2 className="onboading-title">Get started with your email</h2>
+      <h2 className='onboading-title'>Get started with your email</h2>
 
-      <div className={`${!formData.email ? 'centered-custom-input' : ''}`}>
+      <div className={`${!formData.email ? "centered-custom-input" : ""}`}>
         <CustomInput
-          placeholder="type here"
+          placeholder='type here'
           value={formData.email}
-          onValueChange={(value) => onChange('email', value)}
+          onValueChange={(value) => onChange("email", value)}
           required
         />
       </div>
 
-      <Button variant="primary" onClick={nextStep} text="Get Started" />
+      <Button variant='primary' onClick={nextStep} text='Get Started' />
 
-      <p className="agreement-text">
-        By clicking on the button above, you agree to our terms of use and data policy on behalf of
-        the company identified above.
+      <p className='agreement-text'>
+        By clicking on the button above, you agree to our terms of use and data
+        policy on behalf of the company identified above.
       </p>
     </div>
   );
