@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect } from "react";
 import "./CustomInput.css";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -21,7 +21,7 @@ function CustomInput({
   const cursorRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const updateCursor = useCallback(() => {
+  const updateCursor = () => {
     if (!inputRef.current || !overlayRef.current || !cursorRef.current) return;
 
     if (value.length === 0) {
@@ -40,11 +40,11 @@ function CustomInput({
       // Auto-scroll to the end
       container.scrollLeft = container.scrollWidth;
     }
-  }, [value]);
+  };
 
   useEffect(() => {
     updateCursor();
-  }, [updateCursor]);
+  }, [value]);
 
   useEffect(() => {
     window.addEventListener("resize", updateCursor);
@@ -56,7 +56,7 @@ function CustomInput({
       }
     }
     return () => window.removeEventListener("resize", updateCursor);
-  }, [updateCursor]);
+  }, []);
 
   useEffect(() => {
     if (websiteVarient && cursorRef.current) {
