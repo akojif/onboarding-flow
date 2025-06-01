@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import Button from "../ui/Button";
+import { useEffect } from "react";
+import ActionWithHint from "../ui/ActionWithHint";
+import HintEnter from "../ui/HintEnter";
 
 interface ProductPreferenceProps {
   formData: { productPreference: string[] };
@@ -44,6 +47,18 @@ export default function ProductPreferenceStep({
     onChange("productPreference", updated);
   };
 
+  // handle enter key press
+  useEffect(() => {
+    const handleEnterPress = (e: KeyboardEvent) => {
+      if (e.key === "Enter" && formData.productPreference.length > 0) {
+        nextStep();
+      }
+    };
+
+    window.addEventListener("keydown", handleEnterPress);
+    return () => window.removeEventListener("keydown", handleEnterPress);
+  }, [nextStep]); //to avoid holding a stale closure
+
   return (
     <div className='product-preference'>
       <Button variant='back' onClick={prevStep} />
@@ -69,7 +84,10 @@ export default function ProductPreferenceStep({
         </motion.ul>
       </motion.div>
 
-      <Button variant='primary' text='Submit' onClick={nextStep} />
+      <ActionWithHint>
+        <Button variant='primary' text='Submit' onClick={nextStep} />
+        <HintEnter />
+      </ActionWithHint>
     </div>
   );
 }
