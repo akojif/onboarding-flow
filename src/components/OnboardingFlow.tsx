@@ -11,9 +11,9 @@ import PlatformStep from "./steps/PlatformStep";
 import Completed from "./steps/Completed";
 import OnboardingFooter from "./OnboardingFooter";
 import ProgressBar from "./ui/ProgressBar";
-import CardAnimation from "./CardAnimation";
-import BusinessCard from "./ui/BusinessCard";
-import OnboardingContent from "./ui/OnboardingContent";
+import CardAnimation from "./ui/card/CardAnimation";
+import BusinessCard from "./ui/card/BusinessCard";
+import OnboardingContent from "./OnboardingContent";
 import OnboardingStepsAnimation from "./OnboadingStepsAnimation";
 import EcommercePlatformIcon from "./icons/EcommercePlatformIcon";
 

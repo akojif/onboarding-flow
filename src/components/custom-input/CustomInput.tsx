@@ -6,6 +6,7 @@ interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   onValueChange: (newValue: string) => void;
   websiteVarient?: boolean;
+  onEnterPress?: () => void;
 }
 
 function CustomInput({
@@ -15,6 +16,7 @@ function CustomInput({
   type = "text",
   spellCheck = false,
   websiteVarient,
+  onEnterPress,
   ...props
 }: CustomInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,7 +50,6 @@ function CustomInput({
   }, [updateCursor]);
 
   // Add resize listener once (on mount)
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     window.addEventListener("resize", updateCursor);
@@ -60,10 +61,12 @@ function CustomInput({
       }
     }
 
-    return () => window.removeEventListener("resize", updateCursor);
+    return () => {
+      window.removeEventListener("resize", updateCursor);
+    };
   }, []);
 
-  // Website variant cursor adjustment
+  // Website step cursor adjustment
   useEffect(() => {
     if (websiteVarient && cursorRef.current) {
       cursorRef.current.style.left = "10ch";
@@ -77,6 +80,12 @@ function CustomInput({
     }
   };
 
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && value) {
+      onEnterPress?.();
+    }
+  };
+
   return (
     <div className='input-container'>
       <input
@@ -87,6 +96,7 @@ function CustomInput({
         onChange={handleChange}
         onFocus={updateCursor}
         onBlur={updateCursor}
+        onKeyDown={handleEnterPress}
         maxLength={40}
         {...props}
       />

@@ -114,7 +114,7 @@
 }
 
 .website-name-step .overlay::before {
-  content: 'https://';
+  content: "https://";
   color: #ccc;
   width: max-content;
 }
@@ -231,5 +231,33 @@
   .onboarding-content:has(.business-card) {
     flex-direction: column-reverse;
     gap: 40px;
+  }
+}
+
+.action-with-hint {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .hint-enter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--light-grey-5);
+    font-size: 15px;
+    font-weight: 500;
+
+    span {
+      font-weight: 400;
+    }
+
+    svg {
+      background-color: var(--light-grey-2);
+      padding: 3px 6px;
+      width: 28px;
+      height: 25px;
+      border-radius: 5px;
+      opacity: 0.9;
+    }
   }
 }
