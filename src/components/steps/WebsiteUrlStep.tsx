@@ -1,5 +1,7 @@
-import Button from '../ui/Button';
-import CustomInput from '../custom-input/CustomInput';
+import Button from "../ui/Button";
+import CustomInput from "../custom-input/CustomInput";
+import ActionWithHint from "../ui/ActionWithHint";
+import HintEnter from "../ui/HintEnter";
 
 interface WebsiteUrlsProps {
   formData: { websiteUrl: string };
@@ -8,19 +10,28 @@ interface WebsiteUrlsProps {
   prevStep: () => void;
 }
 
-function WebsiteUrlStep({ formData, onChange, nextStep, prevStep }: WebsiteUrlsProps) {
+function WebsiteUrlStep({
+  formData,
+  onChange,
+  nextStep,
+  prevStep,
+}: WebsiteUrlsProps) {
   return (
-    <div className="website-name-step">
-      <div className="website-name-step-content">
-        <Button variant="back" onClick={prevStep} />
-        <h2 className="onboading-title">Company Website?</h2>
+    <div className='website-name-step'>
+      <div className='website-name-step-content'>
+        <Button variant='back' onClick={prevStep} />
+        <h2 className='onboading-title'>Company Website?</h2>
         <CustomInput
           value={formData.websiteUrl}
-          onValueChange={(value) => onChange('websiteUrl', value)}
+          onValueChange={(value) => onChange("websiteUrl", value)}
           required={true}
           websiteVarient={true}
+          onEnterPress={nextStep}
         />
-        <Button variant="primary" onClick={nextStep} />
+        <ActionWithHint>
+          <Button variant='primary' onClick={nextStep} />
+          <HintEnter />
+        </ActionWithHint>
       </div>
     </div>
   );

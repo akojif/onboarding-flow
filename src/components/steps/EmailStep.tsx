@@ -1,6 +1,6 @@
 import CustomInput from "../custom-input/CustomInput";
 import Button from "../ui/Button";
-import BgIllustration from "../ui/card/BgIllustration";
+import BgIllustration from "../ui/BgIllustration";
 
 function EmailStep({
   formData,
@@ -21,6 +21,7 @@ function EmailStep({
           placeholder='type here'
           value={formData.email}
           onValueChange={(value) => onChange("email", value)}
+          onEnterPress={nextStep}
           required
         />
       </div>

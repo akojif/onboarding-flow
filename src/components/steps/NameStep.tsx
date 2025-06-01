@@ -1,5 +1,7 @@
 import Button from "../ui/Button";
 import CustomInput from "../custom-input/CustomInput";
+import HintEnter from "../ui/HintEnter";
+import ActionWithHint from "../ui/ActionWithHint";
 
 export default function NameStep({
   formData,
@@ -16,13 +18,16 @@ export default function NameStep({
     <div className='name-step'>
       <div className='name-step-content'>
         <Button variant='back' onClick={prevStep} />
-
         <h2 className='onboading-title'>What is your name?</h2>
         <CustomInput
           value={formData.name}
           onValueChange={(value) => onChange("name", value)}
+          onEnterPress={nextStep}
         />
-        <Button variant='primary' onClick={nextStep} />
+        <ActionWithHint>
+          <Button variant='primary' onClick={nextStep} />
+          <HintEnter />
+        </ActionWithHint>
       </div>
     </div>
   );
