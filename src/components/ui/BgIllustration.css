@@ -32,6 +32,11 @@
   position: relative;
   top: 10%;
 
+  @media only screen and (max-width: 501px) {
+    width: 70%;
+    min-width: 200px;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -186,7 +191,6 @@
     }
 
     .card-skeleton {
-      max-width: 220px;
       padding: 10px 15px;
     }
 
@@ -218,6 +222,8 @@
       }
     }
   }
+
+  /* chats */
   .text-message {
     padding: 4px;
 
@@ -225,6 +231,51 @@
     .text {
       padding: 4px 8px;
       font-size: 12px;
+    }
+  }
+}
+
+@media only screen and (max-width: 501px) {
+  @media (max-width: 768px) {
+    .bg-illustration {
+      > .text-message:nth-of-type(1) {
+        top: 75%;
+        left: 2%;
+      }
+
+      > .text-message:nth-of-type(2) {
+        top: 70%;
+        right: 2%;
+      }
+
+      .emoji-icons {
+        .icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+
+          &:nth-of-type(3) {
+            bottom: 10%;
+            left: 8%;
+          }
+
+          &:nth-of-type(4) {
+            bottom: 13%;
+            right: 10%;
+          }
+        }
+      }
+    }
+
+    /* chats */
+    .text-message {
+      padding: 4px;
+
+      /* message text */
+      .text {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
     }
   }
 }

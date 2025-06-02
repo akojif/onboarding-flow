@@ -43,13 +43,13 @@
   transform: translateX(0);
 }
 
-.input-container .cursor {
+.input-container .caret {
   position: absolute;
   top: 0;
   left: 0;
   width: 5px;
   height: 80%;
-  background-color: var(--cursor-color);
+  background-color: var(--caret-color);
   animation: blink 1s step-start infinite;
   z-index: 2;
 }

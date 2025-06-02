@@ -45,7 +45,7 @@ function CustomInput({
     }
   }, [value]);
 
-  // Update cursor on every value change
+  // Update caret on every value change
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -54,7 +54,7 @@ function CustomInput({
   }, [updateCaret]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // On window resize re-adjust cursor's position
+  // On window resize re-adjust caret's position
   useEffect(() => {
     window.addEventListener("resize", updateCaret);
     return () => {
@@ -102,7 +102,7 @@ function CustomInput({
         )}
       </div>
 
-      <div ref={InputCaretRef} className='cursor' />
+      <div ref={InputCaretRef} className='caret' />
     </div>
   );
 }
