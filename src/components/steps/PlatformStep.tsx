@@ -17,6 +17,7 @@ export default function PlatformStep({
   prevStep,
 }: PlatformStepProps) {
   // handle enter key press
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleEnterPress = (e: KeyboardEvent) => {
       if (e.key === "Enter" && formData.platform) {

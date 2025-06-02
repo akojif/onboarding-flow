@@ -21,13 +21,16 @@ function WebsiteUrlStep({
       <div className='website-name-step-content'>
         <Button variant='back' onClick={prevStep} />
         <h2 className='onboading-title'>Company Website?</h2>
-        <CustomInput
-          value={formData.websiteUrl}
-          onValueChange={(value) => onChange("websiteUrl", value)}
-          required={true}
-          websiteVarient={true}
-          onEnterPress={nextStep}
-        />
+
+        <div className='prefix-with-input'>
+          <div className='website-prefix'>https://</div>
+          <CustomInput
+            value={formData.websiteUrl}
+            onValueChange={(value) => onChange("websiteUrl", value)}
+            required={true}
+            onEnterPress={nextStep}
+          />
+        </div>
         <ActionWithHint>
           <Button variant='primary' onClick={nextStep} />
           <HintEnter />

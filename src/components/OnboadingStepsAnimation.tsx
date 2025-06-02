@@ -1,12 +1,14 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
 interface OnboardingStepsAnimationProps {
   children: React.ReactNode;
   currentStep: number;
-  websiteUrlActive?: boolean;
 }
 
-function OnboardingStepsAnimation({ currentStep, children, websiteUrlActive }: OnboardingStepsAnimationProps) {
+function OnboardingStepsAnimation({
+  currentStep,
+  children,
+}: OnboardingStepsAnimationProps) {
   const fadeVariants = {
     initial: { opacity: 0, y: 40 },
     animate: { opacity: 1, y: 0, transition: { duration: 1 } },
@@ -20,14 +22,14 @@ function OnboardingStepsAnimation({ currentStep, children, websiteUrlActive }: O
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode='wait'>
       <motion.div
         key={currentStep}
-        className="step-motion-container"
+        className='step-motion-container'
         variants={currentStep === 0 ? firstStepVariants : fadeVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
+        initial='initial'
+        animate='animate'
+        exit='exit'
       >
         {children}
       </motion.div>

@@ -5,7 +5,6 @@ interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   type?: string;
   onValueChange: (newValue: string) => void;
-  websiteVarient?: boolean;
   onEnterPress?: () => void;
 }
 
@@ -15,28 +14,30 @@ function CustomInput({
   placeholder = "type here",
   type = "text",
   spellCheck = false,
-  websiteVarient,
   onEnterPress,
   ...props
 }: CustomInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const InputCaretRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // updateCursor uses value and refs, so we memoize it based on value
-  const updateCursor = useCallback(() => {
-    if (!inputRef.current || !overlayRef.current || !cursorRef.current) return;
+  // updateCaret uses value and refs, so we memoize it based on value
+  const updateCaret = useCallback(() => {
+    if (!inputRef.current || !overlayRef.current || !InputCaretRef.current)
+      return;
 
+    // keep caret next to placeholder text if no actual input value
     if (value.length === 0) {
-      cursorRef.current.style.left = "0px";
+      InputCaretRef.current.style.left = "0px";
       return;
     }
 
+    // update caret position
     const overlayWidth = overlayRef.current.scrollWidth;
     const maxWidth = overlayRef.current.offsetWidth;
     const clampedWidth = Math.min(overlayWidth, maxWidth);
     inputRef.current.style.width = "100%";
-    cursorRef.current.style.left = `${clampedWidth}px`;
+    InputCaretRef.current.style.left = `${clampedWidth}px`;
 
     const container = overlayRef.current.parentElement;
     if (container) {
@@ -46,36 +47,24 @@ function CustomInput({
 
   // Update cursor on every value change
   useEffect(() => {
-    updateCursor();
-  }, [updateCursor]);
-
-  // Add resize listener once (on mount)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    window.addEventListener("resize", updateCursor);
-
     if (inputRef.current) {
       inputRef.current.focus();
-      if (cursorRef.current) {
-        cursorRef.current.style.left = "0px";
-      }
+      updateCaret();
     }
+  }, [updateCaret]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // On window resize re-adjust cursor's position
+  useEffect(() => {
+    window.addEventListener("resize", updateCaret);
     return () => {
-      window.removeEventListener("resize", updateCursor);
+      window.removeEventListener("resize", updateCaret);
     };
   }, []);
 
-  // Website step cursor adjustment
-  useEffect(() => {
-    if (websiteVarient && cursorRef.current) {
-      cursorRef.current.style.left = "10ch";
-    }
-  }, [websiteVarient]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if (newValue.length <= 40) {
+    if (newValue.length <= 30) {
       onValueChange(newValue);
     }
   };
@@ -94,10 +83,10 @@ function CustomInput({
         value={value}
         spellCheck={spellCheck}
         onChange={handleChange}
-        onFocus={updateCursor}
-        onBlur={updateCursor}
+        onFocus={updateCaret}
+        onBlur={updateCaret}
         onKeyDown={handleEnterPress}
-        maxLength={40}
+        maxLength={30}
         {...props}
       />
 
@@ -113,7 +102,7 @@ function CustomInput({
         )}
       </div>
 
-      <div ref={cursorRef} className='cursor' />
+      <div ref={InputCaretRef} className='cursor' />
     </div>
   );
 }

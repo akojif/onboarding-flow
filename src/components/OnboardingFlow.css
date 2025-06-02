@@ -25,6 +25,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .step-motion-container {
+    width: 100%;
+  }
 }
 
 .onboading input::placeholder {
@@ -74,23 +78,23 @@
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-}
 
-.platform-step svg {
-  width: 400px;
-}
+  svg {
+    width: 400px;
+  }
 
-.platform-step .radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
 
-.platform-step .radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }
 
 .onboarding-footer {
@@ -113,14 +117,22 @@
   margin-right: 10px;
 }
 
-.website-name-step .overlay::before {
-  content: "https://";
-  color: #ccc;
-  width: max-content;
-}
+.website-name-step {
+  .input-container .placeholder {
+    display: none;
+  }
+  .prefix-with-input {
+    display: flex;
+    align-items: center;
 
-.website-name-step .input-container .placeholder {
-  display: none;
+    .website-prefix {
+      font-size: clamp(2rem, 4vw, 5rem);
+      display: inline-block;
+      color: #ccc;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+  }
 }
 
 .product-preference {
