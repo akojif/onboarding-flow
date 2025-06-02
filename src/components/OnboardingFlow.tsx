@@ -50,32 +50,34 @@ function OnboardingFlow() {
   const prevStep = () => currentStep > 0 && setCurrentStep((s) => s - 1);
 
   return (
-    <div className='onboading'>
+    <>
       <ProgressBar steps={steps.length} currentStep={currentStep} />
-      <OnboardingNav />
+      <div className='onboading'>
+        <OnboardingNav />
 
-      <OnboardingContent currentStep={currentStep}>
-        <OnboardingStepsAnimation currentStep={currentStep}>
-          <OnboadingComponent
-            formData={formData}
-            onChange={handleChange}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        </OnboardingStepsAnimation>
-        <CardAnimation currentStep={currentStep}>
-          <BusinessCard
-            formData={formData}
-            websiteUrlActive={websiteUrlActive}
-          />
-        </CardAnimation>
-        {currentStep === 4 && (
-          <EcommercePlatformIcon selectedPlatform={formData.platform} />
-        )}
-      </OnboardingContent>
+        <OnboardingContent currentStep={currentStep}>
+          <OnboardingStepsAnimation currentStep={currentStep}>
+            <OnboadingComponent
+              formData={formData}
+              onChange={handleChange}
+              nextStep={nextStep}
+              prevStep={prevStep}
+            />
+          </OnboardingStepsAnimation>
+          <CardAnimation currentStep={currentStep}>
+            <BusinessCard
+              formData={formData}
+              websiteUrlActive={websiteUrlActive}
+            />
+          </CardAnimation>
+          {currentStep === 4 && (
+            <EcommercePlatformIcon selectedPlatform={formData.platform} />
+          )}
+        </OnboardingContent>
 
-      <OnboardingFooter />
-    </div>
+        <OnboardingFooter />
+      </div>
+    </>
   );
 }
 
