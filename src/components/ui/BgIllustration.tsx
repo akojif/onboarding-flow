@@ -3,11 +3,11 @@ import LogoIcon from "../icons/LogoIcon";
 import "./BgIllustration.css";
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.3, y: -100 + "%" },
+  hidden: { opacity: 0, scale: 0.3, y: 50 },
   visible: {
     opacity: 1,
     scale: 1,
-    y: -250,
+    y: 0,
     type: "spring",
     stiffness: 100,
     damping: 10,

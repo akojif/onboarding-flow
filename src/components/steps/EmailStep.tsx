@@ -12,27 +12,29 @@ function EmailStep({
   nextStep: () => void;
 }) {
   return (
-    <div className='get-started-step'>
+    <>
       <BgIllustration />
-      <h2 className='onboading-title'>Get started with your email</h2>
+      <div className='get-started-step'>
+        <h2 className='onboading-title'>Get started with your email</h2>
 
-      <div className={`${!formData.email ? "centered-custom-input" : ""}`}>
-        <CustomInput
-          placeholder='type here'
-          value={formData.email}
-          onValueChange={(value) => onChange("email", value)}
-          onEnterPress={nextStep}
-          required
-        />
+        <div className={`${!formData.email ? "centered-custom-input" : ""}`}>
+          <CustomInput
+            placeholder='type here'
+            value={formData.email}
+            onValueChange={(value) => onChange("email", value)}
+            onEnterPress={nextStep}
+            required
+          />
+        </div>
+
+        <Button variant='primary' onClick={nextStep} text='Get Started' />
+
+        <p className='agreement-text'>
+          By clicking on the button above, you agree to our terms of use and
+          data policy on behalf of the company identified above.
+        </p>
       </div>
-
-      <Button variant='primary' onClick={nextStep} text='Get Started' />
-
-      <p className='agreement-text'>
-        By clicking on the button above, you agree to our terms of use and data
-        policy on behalf of the company identified above.
-      </p>
-    </div>
+    </>
   );
 }
 
