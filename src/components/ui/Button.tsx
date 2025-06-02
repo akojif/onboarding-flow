@@ -1,37 +1,37 @@
-import './Button.css';
-import LeftArrow from '../icons/LeftArrow';
+import "./Button.css";
+import LeftArrow from "../icons/LeftArrow";
 
 type ButtonProps = {
   text?: string;
-  variant?: 'primary' | 'secondary' | 'back';
+  variant?: "primary" | "secondary" | "back";
   onClick?: () => void;
 };
 
 export default function Button({ text, variant, onClick }: ButtonProps) {
   const getButtonClass = () => {
     switch (variant) {
-      case 'primary':
-        return 'btn gradient-bg';
-      case 'secondary':
-        return 'btn gradient-border';
-      case 'back':
-        return 'btn back';
+      case "primary":
+        return "btn gradient-bg";
+      case "secondary":
+        return "btn gradient-border";
+      case "back":
+        return "btn back";
       default:
-        return 'btn';
+        return "btn";
     }
   };
 
-  if (variant === 'back') {
+  if (variant === "back") {
     return (
       <button className={getButtonClass()} onClick={onClick}>
-        <LeftArrow /> {text || 'back'}
+        <LeftArrow /> {text || "Back"}
       </button>
     );
   }
 
   return (
     <button className={getButtonClass()} onClick={onClick}>
-      {text || 'next'}
+      {text || "next"}
     </button>
   );
 }
