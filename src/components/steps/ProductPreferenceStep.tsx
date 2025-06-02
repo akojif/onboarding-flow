@@ -60,7 +60,7 @@ export default function ProductPreferenceStep({
   }, [nextStep]); //to avoid holding a stale closure
 
   return (
-    <div className='product-preference'>
+    <div className='product-preference-step'>
       <Button variant='back' onClick={prevStep} />
       <h2 className='onboading-title'>What kind of products do you sell?</h2>
 
