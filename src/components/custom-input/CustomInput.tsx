@@ -53,13 +53,13 @@ function CustomInput({
     }
   }, [updateCaret]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   // On window resize re-adjust caret's position
   useEffect(() => {
     window.addEventListener("resize", updateCaret);
     return () => {
       window.removeEventListener("resize", updateCaret);
     };
+    // eslint-disable-next-line
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -26,6 +26,7 @@ export default function PlatformStep({
 
     window.addEventListener("keydown", handleEnterPress);
     return () => window.removeEventListener("keydown", handleEnterPress);
+    // eslint-disable-next-line
   }, [nextStep]); //to avoid holding a stale closure
 
   return (
