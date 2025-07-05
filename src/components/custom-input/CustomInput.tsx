@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import "./CustomInput.css";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -20,8 +20,24 @@ function CustomInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const InputCaretRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [cursorPosition, setCursorPosition] = useState(0);
 
-  // updateCaret uses value and refs, so we memoize it based on value
+  // Create a canvas for efficient text measurement
+  const getTextWidth = useCallback((text: string) => {
+    if (!canvasRef.current || !overlayRef.current) return 0;
+    
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return 0;
+    
+    const computedStyle = window.getComputedStyle(overlayRef.current);
+    ctx.font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
+    
+    return ctx.measureText(text).width;
+  }, []);
+
+  // updateCaret uses value and cursorPosition, so we memoize it based on both
   const updateCaret = useCallback(() => {
     if (!inputRef.current || !overlayRef.current || !InputCaretRef.current)
       return;
@@ -32,20 +48,21 @@ function CustomInput({
       return;
     }
 
-    // update caret position
-    const overlayWidth = overlayRef.current.scrollWidth;
-    const maxWidth = overlayRef.current.offsetWidth;
-    const clampedWidth = Math.min(overlayWidth, maxWidth);
-    inputRef.current.style.width = "100%";
-    InputCaretRef.current.style.left = `${clampedWidth}px`;
+    // Calculate caret position based on text width up to cursor position
+    const textUpToCursor = value.substring(0, cursorPosition);
+    const textWidth = getTextWidth(textUpToCursor);
+    const caretLeft = textWidth + 8;
+    
+    InputCaretRef.current.style.left = `${caretLeft}px`;
 
-    const container = overlayRef.current.parentElement;
-    if (container) {
-      container.scrollLeft = container.scrollWidth;
+    // Ensure input stays focused and cursor position is maintained
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
     }
-  }, [value]);
+  }, [value, cursorPosition, getTextWidth]);
 
-  // Update caret on every value change
+  // Update caret on every value or cursor position change
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -66,13 +83,26 @@ function CustomInput({
     const newValue = e.target.value;
     if (newValue.length <= 30) {
       onValueChange(newValue);
+      setCursorPosition(e.target.selectionStart || 0);
     }
   };
 
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && value) {
       onEnterPress?.();
     }
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    setCursorPosition(e.currentTarget.selectionStart || 0);
+  };
+
+  const handleSelect = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    setCursorPosition(e.currentTarget.selectionStart || 0);
+  };
+
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    setCursorPosition(e.currentTarget.selectionStart || 0);
   };
 
   return (
@@ -85,7 +115,10 @@ function CustomInput({
         onChange={handleChange}
         onFocus={updateCaret}
         onBlur={updateCaret}
-        onKeyDown={handleEnterPress}
+        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
+        onClick={handleClick}
+        onSelect={handleSelect}
         maxLength={30}
         {...props}
       />
@@ -103,6 +136,17 @@ function CustomInput({
       </div>
 
       <div ref={InputCaretRef} className='caret' />
+      
+      <canvas 
+        ref={canvasRef} 
+        style={{ 
+          position: 'absolute', 
+          visibility: 'hidden', 
+          pointerEvents: 'none',
+          width: '1px',
+          height: '1px'
+        }} 
+      />
     </div>
   );
 }
